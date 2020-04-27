@@ -1,0 +1,19 @@
+// by default docker only connects to stdout of the container
+// -it allows you to connect to stdin so issue input instructions
+version: '3'
+services:
+  redis-server:
+    image: 'redis'
+  api-server:
+    restart: always // restart whenever process exits RESTART POLICY
+    // ^ "on-failure" exit not equals zero and "no" NO RESTART
+    // build: . // look in current directory for Dockerfile
+    build:
+     context: . // use current directory as context
+     dockerfile: Dockerfile // name of the dockerfile to be used
+    ports:
+      - "3000:3000" // dash in yaml files means array
+    volumes:
+      - /app/node_modules // avoid node_modules mapping outside the container
+      - .:/app
+      
