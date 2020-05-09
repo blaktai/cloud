@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+# see https://docs.ghost.org/docs/config#section-running-ghost-with-config-env-variables
+  ghost:
+    image: ghost:alpine
+    restart: always
+    ports:
+      - 8080:2368
+    environment:
+      database__client: mysql
+      database__connection__host: $GHOST_HOST
+      database__connection__port: $GHOST_PORT 
+      database__connection__password: $GHOST_PASSWORD
+      database__connection__database: $GHOST_DATABASE 
+      database__connection__ssl: "true" 
+
